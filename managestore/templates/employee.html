@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Employee - {{ employee.name }}</title>
+{% endblock %}
+
+{% block body %}
+{% if employee %}
+<h1>Employee: {{ employee.name }}</h1>
+<form method="POST" action="/employee/{{employee.id}}">
+    <div class="form-group row">
+        <label for="name" class="col-sm-2 col-form-label">Name</label>
+        <div class="col-sm-10">
+            <input type="text" readonly class="form-control-plaintext" id="name" name="name" value="{{ employee.name }}">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="role" class="col-sm-2 col-form-label">Role</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="role" name="role" value="{{ employee.role }}">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="wage" class="col-sm-2 col-form-label">Wage</label>
+        <div class="col-sm-10">
+            <input type="number" class="form-control" id="wage" name="wage" value="{{ employee.wage }}">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="startedAt" class="col-sm-2 col-form-label">Started At</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="startedAt" name="startedAt" value="{{ employee.started_at }}">
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>
+<form method="POST" action="/fire/{{employee.id}}" style="margin-top: 10px;">
+    <button type="submit" class="btn btn-secondary">Fire</button>
+</form>
+{% else %}
+<p>고용된 직원이 아닙니다.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Hello Flask</title>
+{% endblock %}
+
+{% block body %}
+<h1>Store Admin</h1>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">{{ store.name }}</h1>
+        <p class="lead">상점 위치: {{ store.place }}</p>
+    </div>
+</div>
+<h2>
+    Products
+    <a class="btn btn-primary" href="/product" role="button">상품 추가</a>
+</h2>
+<div class="row">
+    {% for product in store.products %}
+    <div class="card col-md-3" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{product.name}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{product.category}}</h6>
+            <p class="card-text">원가: {{product.cost}}</p>
+            <p class="card-text">정가: {{product.price}}</p>
+            <!-- <!-- <a href="#" class="card-link">Card link</a> -->
+            <a href="{{url_for('product', id=product.id)}}" class="card-link">상세보기</a>
+            <p class="card-text">수량: {{ product.count}}</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<h2>
+    Employees
+    <a class="btn btn-primary" href="/employee" role="button">직원 추가</a>
+</h2>
+<div class="row">
+    {% for employee in store.employees %}
+    <div class="card col-md-6" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{employee.name}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{employee.role}}</h6>
+            <p class="card-text">임금: {{employee.wage}}</p>
+            <p class="card-text">고용일: {{employee.started_at}}</p>
+            <!-- <!-- <a href="#" class="card-link">Card link</a> -->
+            <a href="{{url_for('employee', id=employee.id)}}" class="card-link">상세보기</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
